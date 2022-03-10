@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Calculator with H5, C3, JS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: #333;
+            color: #fff;
+        }
+
+        .calculator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            text-align: center;
+        }
+
+        input[type="button"] {
+            width: 25%;
+            height: 50%;
+            font-size: 40px;
+            cursor: pointer;
+            margin: 2px;
+            padding: 5px 60px;
+            text-align: center;
+        }
+
+        .textField {
+            width: 95%;
+            margin: 2px;
+            font-size: 30px;
+            border: 1px solid #fff;
+            padding: 50px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <form action="">
+            <input type="text" class="textField" value="">
+        </form>
+        <table>
+            <tr>
+                <td><input type="button" value="7"></td>
+                <td><input type="button" value="8"></td>
+                <td><input type="button" value="9"></td>
+                <td><input type="button" value="/"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4"></td>
+                <td><input type="button" value="5"></td>
+                <td><input type="button" value="6"></td>
+                <td><input type="button" value="*"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="0"></td>
+                <td><input type="button" value="."></td>
+                <td><input type="button" value="+"></td>
+                <td><input type="button" value="="></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="c"></td>
+                <td><input type="button" value="d"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+    // Select all of the buttons
+
+    const buttons = document.querySelectorAll("input[type='button']");
+    const textField = document.querySelector(".textField");
+    // Add the event to every button
+
+    buttons.forEach(button => button.addEventListener("click", getTheValue));
+    
+    function getTheValue() {
+        let value = this.value;
+
+        if (value !== "d" && value !== "c" && value !== "=") {
+            textField.value = textField.value + value;
+        }
+
+        if (value == "=") {
+            textField.value = eval(textField.value);
+        }
+
+        if (value == "d") {
+            let length = textField.value;
+            textField.value = length.substring(0, length.length - 1);
+        }
+
+        if (value == "c") {
+            textField.value = "";
+        }
+
+        // console.log(textField.value);
+    }
+    </script>
+</body>
+</html>
